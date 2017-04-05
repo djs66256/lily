@@ -1,5 +1,6 @@
 stat/app/data/
 stat/app/dist/
+yarn.lock
 # Logs
 logs
 *.log
