@@ -1,0 +1,107 @@
+{
+  "id": "event",
+  "isDirectory": true,
+  "name": "事件",
+  "columns": [
+    {
+      "type": "text",
+      "required": true,
+
+      "title": "名字",
+      "dataIndex": "name",
+      "key": "name",
+      "sorter": true,
+      "visible": true,
+      "editable": true,
+      "searchable": true
+    },
+    {
+      "type": "text",
+      "required": true,
+
+      "title": "统计ID",
+      "dataIndex": "statId",
+      "key": "statId",
+      "sorter": true,
+      "visible": true,
+      "editable": true,
+      "searchable": true
+    },
+    {
+      "type": "text",
+      "required": false,
+
+      "title": "描述",
+      "dataIndex": "description",
+      "key": "description",
+      "visible": true,
+      "editable": true
+    },
+    {
+      "type": "text",
+      "required": false,
+
+      "title": "版本-iOS",
+      "dataIndex": "version_iOS",
+      "key": "version_iOS",
+      "sorter": true,
+      "visible": true,
+      "editable": true,
+      "searchable": true
+    },
+    {
+      "type": "text",
+      "required": false,
+
+      "title": "版本-Android",
+      "dataIndex": "version_Android",
+      "key": "version_Android",
+      "sorter": true,
+      "visible": true,
+      "editable": true,
+      "searchable": true
+    },
+    {
+      "type": "text",
+      "required": false,
+
+      "title": "更新时间",
+      "dataIndex": "createTime",
+      "key": "createTime",
+      "sorter": true,
+      "visible": false,
+      "editable": false
+    },
+    {
+      "type": "text",
+      "required": false,
+
+      "title": "iOS-Log",
+      "dataIndex": "iOS_log",
+      "key": "iOS_log",
+      "visible": false,
+      "editable": true
+    },
+    {
+      "type": "text",
+      "required": false,
+
+      "title": "Android-Log",
+      "dataIndex": "Android_log",
+      "key": "Android_log",
+      "visible": false,
+      "editable": true
+    },
+    {
+      "type": "params",
+      "paramsKey": "params",
+      "required": false,
+
+      "title": "参数",
+      "dataIndex": "params",
+      "key": "params",
+      "visible": true,
+      "editable": true
+    }
+  ]
+}

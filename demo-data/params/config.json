@@ -1,0 +1,50 @@
+{
+  "id": "params",
+  "isDirectory": true,
+  "name": "参数",
+  "columns": [
+    {
+      "type": "text",
+      "required": true,
+
+      "title": "名字",
+      "dataIndex": "name",
+      "key": "name",
+      "sorter": true,
+      "visible": true,
+      "editable": true
+    },
+    {
+      "type": "text",
+      "required": true,
+
+      "title": "参数ID",
+      "dataIndex": "paramId",
+      "key": "paramId",
+      "sorter": true,
+      "visible": true,
+      "editable": true
+    },
+    {
+      "type": "text",
+      "required": false,
+
+      "title": "描述",
+      "dataIndex": "description",
+      "key": "description",
+      "visible": true,
+      "editable": true
+    },
+    {
+      "type": "text",
+      "required": false,
+
+      "title": "更新时间",
+      "dataIndex": "createTime",
+      "key": "createTime",
+      "sorter": true,
+      "visible": true,
+      "editable": false
+    }
+  ]
+}

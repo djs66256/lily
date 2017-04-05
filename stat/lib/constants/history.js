@@ -1,0 +1,2 @@
+export const HISTORY_SHOW = 'HISTORY_SHOW'
+export const HISTORY_DISSMISS = 'HISTORY_DISSMISS'

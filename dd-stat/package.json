@@ -1,0 +1,36 @@
+{
+  "name": "dd-stat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/index.js",
+  "scripts": {
+    "dev": "webpack -w",
+    "app": "babel-node lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel",
+  "license": "MIT",
+  "dependencies": {
+    "uuid": ""
+  },
+  "devDependencies": {
+    "ava": "^0.17.0",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-babili": "^0.0.9",
+    "babel-preset-latest": "",
+    "babel-preset-react": "^6.16.0",
+    "eslint": "^3.14.1"
+  },
+  "temp": {
+    "webpack": "^2.2.0-rc.3",
+    "v8-lazy-parse-webpack-plugin": "^0.3.0",
+    "copy-webpack-plugin": "^4.0.0",
+    "cross-env": "3.1.3",
+    "eslint-config-xo-react": "^0.10.0",
+    "eslint-plugin-react": "^6.7.1",
+    "husky": "^0.11.6",
+    "spectron": "^3.4.0"
+  }
+}
