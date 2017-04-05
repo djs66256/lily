@@ -125,7 +125,12 @@ export default class CreateStat extends React.Component {
       saveStat(this.state, selectedNode).then(()=>{
         Message.info('保存成功')
         console.log('/');
-        this.props.history.replace('/')
+        if (this.props.history.canGo(-1)) {
+          this.props.history.goBack()
+        }
+        else {
+          this.props.history.replace('/')
+        }
       }).catch(e=>{
         e && Message.error(e.message)
       })

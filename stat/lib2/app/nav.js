@@ -59,8 +59,13 @@ export default class Nav extends React.Component {
           style = {{marginLeft: 20}}
           onClick={()=>{
           console.log('home: /');
-          this.props.history.replace('/')
-        }}>首页</Button>
+          if (this.props.history.canGo(-1)) {
+            this.props.history.goBack()
+          }
+          else {
+            this.props.history.replace('/')
+          }
+        }}>返回</Button>
         <Button type='primary'
           size='large'
           style = {{marginLeft: 20}}
@@ -74,7 +79,7 @@ export default class Nav extends React.Component {
           disabled={!this.state.index}
           onClick={()=>{
             console.log('/search')
-            this.props.history.replace('/search')
+            this.props.history.push('/search')
           }}>
           搜索
         </Button>

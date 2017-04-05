@@ -17,13 +17,17 @@ class MainContainer extends React.Component {
   render() {
     let props = Object.assign({}, this.props)
     delete props.children
+    let {history} = this.props
+    let isMain = history.location.pathname == '/'
+    let isSearch = history.location.pathname == '/search'
     return (
       <div style={{
         display: 'flex',
         height: '100%',
         flexGrow: 1
       }}>
-        <Main {...props}/>
+        <Main style={isMain ? {} : {display: 'none'}} {...props}/>
+        <Search style={isSearch ? {} : {display: 'none'}} {...props}/>
         {this.props.children}
       </div>
     )
@@ -46,18 +50,18 @@ export default class App extends React.Component {
   }
 
   onEdit(stat) {
-    this.props.history.replace('/edit', stat)
+    this.props.history.push('/edit', stat)
     console.log('/edit', stat);
   }
 
   onHistory(stat) {
-    this.props.history.replace('/history', stat)
+    this.props.history.push('/history', stat)
     console.log('/history', stat);
   }
 
   onCreate() {
     if (this.state.selectedNode) {
-      this.props.history.replace('/create')
+      this.props.history.push('/create')
       console.log('/create')
     }
     else {
@@ -82,12 +86,14 @@ export default class App extends React.Component {
 
   render() {
     let props = {
+      history:this.props.history,
       onSelectedNodeChanged:this.onSelectedNodeChanged,
       root:this.state.root,
       selectedNode:this.state.selectedNode,
       onHistory:this.onHistory,
       onEdit:this.onEdit
     }
+    let locationState = this.props.history.location.state
     return (<div style={{
       width: '100%',
       height: '100%',
@@ -97,28 +103,27 @@ export default class App extends React.Component {
       <Nav history={this.props.history} rootNode={this.state.root} onCreate={this.onCreate}/>
       <Switch>
         <Route path='/history'>
-          <MainContainer style={{display: 'none'}} {...props}>
+          <MainContainer {...props}>
             <History
               currentNode={this.props.history.location.state} />
           </MainContainer>
         </Route>
         <Route path='/create'>
-          <MainContainer style={{display: 'none'}} {...props}>
+          <MainContainer {...props}>
             <Create selectedNode={this.state.selectedNode}
               history={this.props.history}/>
           </MainContainer>
         </Route>
         <Route path='/edit'>
-          <MainContainer style={{display: 'none'}} {...props}>
+          <MainContainer {...props}>
             <Create
               currentNode={this.props.history.location.state}
-              selectedNode={this.state.selectedNode}
+              selectedNode={locationState ? locationState.superNode : this.state.selectedNode}
               history={this.props.history}/>
           </MainContainer>
         </Route>
         <Route path='/search'>
-          <MainContainer style={{display: 'none'}} {...props}>
-            <Search rootNode={this.state.root} />
+          <MainContainer {...props}>
           </MainContainer>
         </Route>
         <Route>

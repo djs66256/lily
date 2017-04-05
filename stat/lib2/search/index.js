@@ -1,5 +1,6 @@
 import React from 'react'
 import {Message, Spin, Table} from 'antd'
+import ActionButtons from '../stat/action-buttons'
 
 import Filters from './filters'
 
@@ -16,8 +17,9 @@ export default class Search extends React.Component {
 
   componentDidMount() {
     let node = null
-    const {rootNode} = this.props
-    for (let dir of rootNode.dirs) {
+    const {root} = this.props
+    if (!root) return
+    for (let dir of root.dirs) {
       if (dir.id == 'event') {
         node = dir
         break;
@@ -33,7 +35,11 @@ export default class Search extends React.Component {
 
   onFilters(filters) {
     console.log(filters);
-    const {rootNode} = this.props
+    const {root} = this.props
+    if (!root) {
+      Message.error('数据错误')
+      return
+    }
     this.filterStats = []
     if (filters && filters.length > 0 && this.state.node) {
       this.state.loading = true
@@ -49,7 +55,7 @@ export default class Search extends React.Component {
         }
       })
 
-      rootNode.enumeratStatNode({node: this.state.node, callback: stat=>{
+      root.enumeratStatNode({node: this.state.node, callback: stat=>{
         for (let filter of filters) {
           if (!filter(stat)) return
         }
@@ -73,15 +79,16 @@ export default class Search extends React.Component {
   }
 
   render() {
+    const {style, history} = this.props
     if (this.state.node) {
       return (
-        <div style={{
+        <div style={Object.assign({
           height: '100%',
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'auto'
-        }}>
+        }, style)}>
           <Spin spinning={this.state.loading} size='large'>
           <Filters style={{
             width: '100%',
@@ -113,6 +120,23 @@ export default class Search extends React.Component {
                     }
                     return null
                   }
+                }
+              })
+              columns.push({
+                title: '操作',
+                key: 'action',
+                render: (text, record, index) => {
+                  return (
+                    <ActionButtons
+                      onEdit={()=>{
+                        console.log('/edit', record);
+                        history && history.push('/edit', record)
+                      }}
+                      onHistory={()=>{
+                        console.log('/history', record);
+                        history && history.push('/history', record)
+                      }}/>
+                  )
                 }
               })
               let dataSource = this.state.stats.slice(0, 500).map((node, index) => {
