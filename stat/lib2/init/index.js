@@ -12,7 +12,8 @@ export default class Init extends React.Component {
   selectDataDir() {
     console.log(this);
     selectDataDir().then(dir => {
-      loadRootStat(dir).then(() => {
+      loadRootStat(dir).then((stdout) => {
+        if (stdout) Message.info(stdout.toString())
         this.props.history.replace('/')
       })
     }).catch(e => {

@@ -44,6 +44,7 @@ if (/*false && */basedir) {
     console.log('go to index');
     history.replace('/')
   }).catch(e => {
+    if (e && e.message) Message.error(e.message)
     console.log(e);
     history.replace('/init')
   })
