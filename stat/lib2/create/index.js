@@ -1,6 +1,6 @@
 import React from 'react'
 import {getRootNode, saveStat} from '../stat-data'
-import {Card, Input, Form, Message, Button, Select, Icon} from 'antd'
+import {Card, Input, Form, Message, Button, Select, Icon, Spin} from 'antd'
 const Option = Select.Option
 
 class ParamsComponent extends React.Component {
@@ -101,6 +101,7 @@ export default class CreateStat extends React.Component {
 
   constructor(props) {
     super(props)
+    this.loading = false
     this.handleChange = this.handleChange.bind(this)
     this.saveStat = this.saveStat.bind(this)
     this.handleParamsChange = this.handleParamsChange.bind(this)
@@ -122,9 +123,13 @@ export default class CreateStat extends React.Component {
           return
         }
       }
-      saveStat(this.state, selectedNode).then(()=>{
-        Message.info('保存成功')
+      this.loading = true
+      this.setState(this.state)
+      saveStat(this.state, selectedNode).then((stdout)=>{
+        Message.info('保存成功'+ (stdout ? `\n${stdout}` : ''))
         console.log('/');
+        this.loading = false
+        this.setState(this.state)
         if (this.props.history.canGo(-1)) {
           this.props.history.goBack()
         }
@@ -132,6 +137,8 @@ export default class CreateStat extends React.Component {
           this.props.history.replace('/')
         }
       }).catch(e=>{
+        this.loading = false
+        this.setState(this.state)
         e && Message.error(e.message)
       })
     }
@@ -161,6 +168,7 @@ export default class CreateStat extends React.Component {
           overflow: 'auto',
           padding: '20px 0'
         }}>
+          <Spin spinning={this.loading}>
               <Form >
                 {columns && columns.length && columns.filter(column=>column.editable).map(column => {
                   if (column.type === 'text') {
@@ -204,6 +212,7 @@ export default class CreateStat extends React.Component {
                   保存
                 </Button>
               </div>
+            </Spin>
         </div>
     )
   }

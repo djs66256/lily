@@ -5,6 +5,7 @@ const path = require('path')
 const BaseObject = require('./BaseObject')
 const FilePersistent = require('./FilePersistent')
 let filePersistent = new FilePersistent()
+const GitPersistent = require('./GitPersistent')
 
 class Node {
   constructor(params = {}) {
@@ -13,6 +14,10 @@ class Node {
     this.id = id || UUID().replace(/-/g, '')
     this.key = this.id
     this.superNode = superNode
+  }
+
+  getRootNode() {
+    return this.superNode && this.superNode.getRootNode()
   }
 
   getColumns() {
@@ -91,6 +96,12 @@ class StatNode extends Node {
   async save() {
     this.createTime = new Date().toISOString()
     await filePersistent.saveStat(this)
+
+    let git = new GitPersistent(this.getRootNode().basedir)
+    await git.pull()
+    let message = `update ${this.name || ''} ${this.statId || ''}`
+    await git.commit(message)
+    await git.push()
   }
 
   async loadHistories() {
@@ -113,8 +124,22 @@ class RootNode extends DirNode {
     this.basedir = basedir
   }
 
+  getRootNode() {
+    return this
+  }
+
   getBasedir() {
     return this.basedir
+  }
+
+  async loadDirNodes() {
+    let git = new GitPersistent(this.basedir)
+    await git.pull()
+    let stdout = await git.status()
+    if (!stdout.match(/nothing to commit/)) {
+      await git.push()
+    }
+    return await super.loadDirNodes()
   }
 
   async enumeratStatNode({node, callback}) {
