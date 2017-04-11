@@ -134,12 +134,14 @@ class RootNode extends DirNode {
 
   async loadDirNodes() {
     let git = new GitPersistent(this.basedir)
-    await git.pull()
-    let stdout = await git.status()
+    let log = await git.pull() || ''
+    let stdout = await git.status() || ''
+    if (stdout) log += stdout
     if (!stdout.match(/nothing to commit/)) {
-      await git.push()
+      log += await git.push() || ''
     }
-    return await super.loadDirNodes()
+    log += await super.loadDirNodes() || ''
+    return log
   }
 
   async enumeratStatNode({node, callback}) {

@@ -1,5 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
+import {Message} from 'antd'
 import {Router, Switch, Route, IndexRoute, Link} from 'react-router'
 import {getDataDir, loadRootStat} from './stat-data'
 // import {browserHistory} from 'react-router/lib/browserHistory'
@@ -38,7 +39,8 @@ console.log(history, history.location);
 const basedir = getDataDir()
 console.log('basedir: ', basedir);
 if (/*false && */basedir) {
-  loadRootStat(basedir).then(() => {
+  loadRootStat(basedir).then((stdout) => {
+    if (stdout) Message.info(stdout)
     console.log('go to index');
     history.replace('/')
   }).catch(e => {
