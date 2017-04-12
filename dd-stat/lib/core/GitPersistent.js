@@ -22,7 +22,7 @@ ${stash ? `${shSep}git stash pop${shSep}` : ''}`
       exec(cmd, (err, stdout, stderr) => {
         console.log(err, stdout, stderr);
         if (err) {
-          log(err)
+          log(err.message)
           reject(err)
         }
         else {
@@ -56,7 +56,7 @@ ${stash ? `${shSep}git stash pop${shSep}` : ''}`
         exec(cmd, (err, stdout, stderr) => {
           console.log(err, stdout, stderr);
           if (err) {
-            log(err)
+            log(err.message)
             reject(err)
           }
           else {
@@ -71,7 +71,7 @@ ${stash ? `${shSep}git stash pop${shSep}` : ''}`
       exec(`cd "${this.basedir}"${shSep} git status`, (err, stdout, stderr) => {
         console.log(err, stdout, stderr);
         if (err) {
-          log(err)
+          log(err.message)
           reject(err)
         }
         else {
