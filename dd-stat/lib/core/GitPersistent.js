@@ -3,6 +3,8 @@ const exec = require('child_process').exec
 const platform = require('os').platform()
 const shSep = platform == 'win32' ? ' && ' : ';'
 
+const log = alert
+
 class GitPersistent {
 
   constructor(basedir) {
@@ -20,6 +22,7 @@ ${stash ? `${shSep}git stash pop${shSep}` : ''}`
       exec(cmd, (err, stdout, stderr) => {
         console.log(err, stdout, stderr);
         if (err) {
+          log(err)
           reject(err)
         }
         else {
@@ -36,7 +39,7 @@ ${stash ? `${shSep}git stash pop${shSep}` : ''}`
         exec(cmd, (err, stdout, stderr) => {
           console.log(err, stdout, stderr);
           if (err) {
-          //alert(err.message)
+            log(err.message)
             reject(err)
           }
           else {
@@ -53,6 +56,7 @@ ${stash ? `${shSep}git stash pop${shSep}` : ''}`
         exec(cmd, (err, stdout, stderr) => {
           console.log(err, stdout, stderr);
           if (err) {
+            log(err)
             reject(err)
           }
           else {
@@ -67,6 +71,7 @@ ${stash ? `${shSep}git stash pop${shSep}` : ''}`
       exec(`cd "${this.basedir}"${shSep} git status`, (err, stdout, stderr) => {
         console.log(err, stdout, stderr);
         if (err) {
+          log(err)
           reject(err)
         }
         else {
