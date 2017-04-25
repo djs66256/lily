@@ -74,6 +74,7 @@ Create by Lily, ${new Date().toISOString()}
 /*
 Name: ${stat.name}
 Params: ${params.join(', ')}
+Description: ${stat.description || ''}
 Source: ${stat.getFullSourceName()}
 Version: ${stat.version_iOS}
 */`}).join('')
