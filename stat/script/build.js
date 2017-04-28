@@ -64,7 +64,9 @@ function generateStatsFromNode(node) {
 }
 
 export async function build(rootNode, basedir) {
-  const buildBasedir = path.join(remote.process.cwd(), 'app', 'dist', 'assets')
+  let distribution = true
+  const resourcesPath = distribution ? remote.process.resourcesPath : remote.process.cwd()
+  const buildBasedir = path.join(resourcesPath, 'app', 'dist', 'assets')
   const configPath = path.join(buildBasedir, 'build.json')
   const jsonData = fs.readFileSync(configPath)
   const config = JSON.parse(jsonData)

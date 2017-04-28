@@ -34,10 +34,10 @@ export default class Nav extends React.Component {
       if (dirs.length > 0) build(rootNode, dirs[0]).then(()=>{
         Message.info('编译成功')
       })
-      // .catch(e=>{
-      //   e && Message.error(e.message)
-      //   console.log(e.message)
-      // })
+      .catch(e=>{
+        e && Message.error(e.message)
+        console.log(e.message)
+      })
     })
   }
 
