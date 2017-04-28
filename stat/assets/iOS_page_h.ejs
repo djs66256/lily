@@ -1,0 +1,14 @@
+/*
+Total <%= Object.keys(page).length%> events
+Create by Lily, <%= new Date().toISOString() %>
+*/
+
+<% for(let stat of page) { %>
+/*
+Name: <%= stat.name %>
+Description: <%= stat.description || '' %>
+Source: <%= stat.getFullSourceName() %>
+Version: <%= stat.version_iOS %>
+*/
+FOUNDATION_EXTERN NSString * MZTrackPageId_<%= stat.pageId %>;
+<% } %>

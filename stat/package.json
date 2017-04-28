@@ -8,11 +8,12 @@
   },
   "scripts": {
     "dev": "webpack -w",
-    "app": "electron app",
+    "app": "electron app/index.js",
     "lint": "eslint ."
   },
   "dependencies": {
     "dd-stat": "file:../dd-stat",
+    "ejs": "^2.5.6",
     "eslint-plugin-react": "^6.10.3",
     "react-router": "^4.0.0",
     "uuid": "3.0.0"

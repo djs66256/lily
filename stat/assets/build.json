@@ -1,0 +1,27 @@
+{
+  "version": 0.1,
+  "config": [
+    {
+      "platform": "iOS",
+      "version": 0.1,
+      "scripts": [
+        {
+          "template": "iOS_page_h.ejs",
+          "output": "MZPageEvent.h"
+        },
+        {
+          "template": "iOS_page_m.ejs",
+          "output": "MZPageEvent.m"
+        },
+        {
+          "template": "iOS_event_h.ejs",
+          "output": "MZClickEvent.h"
+        },
+        {
+          "template": "iOS_event_m.ejs",
+          "output": "MZClickEvent.m"
+        }
+      ]
+    }
+  ]
+}
