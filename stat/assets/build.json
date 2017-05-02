@@ -22,6 +22,21 @@
           "output": "MZClickEvent.m"
         }
       ]
+    },
+    {
+      "platform": "csv",
+      "version": 0.1,
+      "scripts": [
+        {
+          "template": "csv_event.ejs",
+          "output": "event.csv"
+        },
+        {
+          "template": "csv_page.ejs",
+          "output": "page.csv"
+        }
+
+      ]
     }
   ]
 }

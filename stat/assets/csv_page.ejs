@@ -1,0 +1,3 @@
+名字, 统计ID, 描述, iOS版本, Android版本, iOS Log, Android Log, 位置
+<% for(let stat of page) { %><%= stat.name %>, <%= stat.pageId %>, <%= stat.description || '' %>, <%= stat.version_iOS %>, <%= stat.version_Android %>, <%= stat.iOS_log %>, <%= stat.Android_log %>, <%= stat.getFullSourceName() %>
+<% } %>

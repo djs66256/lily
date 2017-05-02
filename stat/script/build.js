@@ -63,10 +63,23 @@ function generateStatsFromNode(node) {
   return nodes
 }
 
+function getConfigBasePath() {
+  function getConfigBasePathDistribution(distribution) {
+    const resourcesPath = distribution ? remote.process.resourcesPath : remote.process.cwd()
+    const buildBasedir = path.join(resourcesPath, 'app', 'dist', 'assets')
+    return buildBasedir
+  }
+  let buildBasedir = getConfigBasePathDistribution(true)
+  if (fs.existsSync(path.join(buildBasedir, 'build.json'))) {
+    return buildBasedir
+  }
+  else {
+    return getConfigBasePathDistribution(false)
+  }
+}
+
 export async function build(rootNode, basedir) {
-  let distribution = true
-  const resourcesPath = distribution ? remote.process.resourcesPath : remote.process.cwd()
-  const buildBasedir = path.join(resourcesPath, 'app', 'dist', 'assets')
+  const buildBasedir = getConfigBasePath()
   const configPath = path.join(buildBasedir, 'build.json')
   const jsonData = fs.readFileSync(configPath)
   const config = JSON.parse(jsonData)
@@ -75,11 +88,11 @@ export async function build(rootNode, basedir) {
 
   let ejsNode = {}
   for (let node of rootNode.dirs) {
-    if (node.id == 'page') {
-      ejsNode.page = sortStats(getStatsFromNode(node))
-    }
-    else if (node.id == 'event') {
+    if (node.id == 'event') {
       ejsNode.event = generateStatsFromNode(node)
+    }
+    else {
+      ejsNode[node.id] = sortStats(getStatsFromNode(node))
     }
   }
 
@@ -90,7 +103,7 @@ export async function build(rootNode, basedir) {
       fs.mkdir(platformDir)
     }
 
-    for (let script of buildConf.scripts) {
+    if (buildConf.scripts) for (let script of buildConf.scripts) {
       // let ejs = EJS.renderFile(path.join(buildBasedir, script.template), {data:'aaa'}, {cache: false, debug: true})
       let templateString = fs.readFileSync(path.join(buildBasedir, script.template)).toString()
       let renderedString = EJS.render(templateString, ejsNode, {cache: false})

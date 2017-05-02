@@ -31,7 +31,7 @@ export default class Nav extends React.Component {
   build() {
     const {rootNode} = this.props
     dialog.showOpenDialog({properties: ['openDirectory']}, dirs=>{
-      if (dirs.length > 0) build(rootNode, dirs[0]).then(()=>{
+      if (dirs && dirs.length > 0) build(rootNode, dirs[0]).then(()=>{
         Message.info('编译成功')
       })
       .catch(e=>{
