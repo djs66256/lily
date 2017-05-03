@@ -1,0 +1,23 @@
+/*
+Total <%= params ? params.length : 0 %> params
+Total <%= constant ? constant.length : 0 %> constant value
+Create by Lily, <%= new Date().toISOString() %>
+*/
+
+#pragma mark - Params
+<% if (params) for(let stat of params) { %>
+/*
+Name: <%= stat.name %>
+Description: <%= stat.description || '' %>
+*/
+NSString * MZTrackEventParam<%= stat.paramId.toString()[0].toUpperCase() + stat.paramId.toString().slice(1) %>Key = @"<%= stat.paramId %>";
+<% } %>
+
+#pragma mark - Constants
+<% if (constant) for (let stat of constant) { if (stat.iOSValue) { %>
+/*
+Name: <%= stat.name %>
+Description: <%= stat.description || '' %>
+*/
+<%= stat.iOSType || 'NSString *'%> const <%= stat.iOSValue %> = @"<%= stat.constId %>";
+<% }} %>

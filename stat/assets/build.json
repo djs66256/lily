@@ -20,6 +20,14 @@
         {
           "template": "iOS_event_m.ejs",
           "output": "MZClickEvent.m"
+        },
+        {
+          "template": "iOS_const_h.ejs",
+          "output": "MZClickConstant.h"
+        },
+        {
+          "template": "iOS_const_m.ejs",
+          "output": "MZClickConstant.m"
         }
       ]
     },

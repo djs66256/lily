@@ -108,8 +108,22 @@ export default class CreateStat extends React.Component {
   }
 
   componentWillMount() {
-    let {currentNode} = this.props
-    this.state = currentNode || {}
+    let {currentNode, selectedNode} = this.props
+    if (currentNode) {
+      // edit
+      this.state = currentNode
+    }
+    else {
+      // create
+      this.state = {}
+
+      let columns = selectedNode.getColumns()
+      for (let col of columns) {
+        if (col.defaultValue) {
+          this.state[col.key] = col.defaultValue
+        }
+      }
+    }
   }
 
   saveStat() {

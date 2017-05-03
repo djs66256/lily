@@ -1,0 +1,26 @@
+/*
+Total <%= params ? params.length : 0 %> params
+Total <%= constant ? constant.length : 0 %> constant value
+Create by Lily, <%= new Date().toISOString() %>
+*/
+
+typedef NSString * MZExposeSource;
+typedef NSString * MZExposeSourceType;
+
+#pragma mark - Params
+<% if (params) for(let stat of params) { %>
+/*
+Name: <%= stat.name %>
+Description: <%= stat.description || '' %>
+*/
+FOUNDATION_EXTERN NSString * MZTrackEventParam<%= stat.paramId.toString()[0].toUpperCase() + stat.paramId.toString().slice(1) %>Key;
+<% } %>
+
+#pragma mark - Constants
+<% if (constant) for (let stat of constant) { if (stat.iOSValue) { %>
+/*
+Name: <%= stat.name %>
+Description: <%= stat.description || '' %>
+*/
+FOUNDATION_EXTERN <%= stat.iOSType || 'NSString *'%> const <%= stat.iOSValue %>;
+<% }} %>

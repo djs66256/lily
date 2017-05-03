@@ -1,5 +1,5 @@
 /*
-Total <%= Object.keys(event).length%> events
+Total <%= event.length%> events
 Create by Lily, <%= new Date().toISOString() %>
 */
 
@@ -13,5 +13,5 @@ Source: <%= stat.getFullSourceName() %>
 Version: <%= stat.version_iOS %>
 */
 <% } %>
-FOUNDATION_EXTERN NSString * MZTrackEventId_<%= e.statId %> = @"<%= e.statId %>";
+NSString * MZTrackEventId_<%= e.statId %> = @"<%= e.statId %>";
 <% } %>
