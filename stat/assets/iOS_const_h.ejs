@@ -13,7 +13,7 @@ typedef NSString * MZExposeSourceType;
 Name: <%= stat.name %>
 Description: <%= stat.description || '' %>
 */
-FOUNDATION_EXTERN NSString * MZTrackEventParam<%= stat.paramId.toString()[0].toUpperCase() + stat.paramId.toString().slice(1) %>Key;
+FOUNDATION_EXTERN NSString * const MZTrackEventParam<%= stat.paramId.toString()[0].toUpperCase() + stat.paramId.toString().slice(1) %>Key;
 <% } %>
 
 #pragma mark - Constants

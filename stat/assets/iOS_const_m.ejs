@@ -12,7 +12,7 @@ Create by Lily, <%= new Date().toISOString() %>
 Name: <%= stat.name %>
 Description: <%= stat.description || '' %>
 */
-NSString * MZTrackEventParam<%= stat.paramId.toString()[0].toUpperCase() + stat.paramId.toString().slice(1) %>Key = @"<%= stat.paramId %>";
+NSString * const MZTrackEventParam<%= stat.paramId.toString()[0].toUpperCase() + stat.paramId.toString().slice(1) %>Key = @"<%= stat.paramId %>";
 <% } %>
 
 #pragma mark - Constants

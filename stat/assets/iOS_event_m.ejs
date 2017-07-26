@@ -15,5 +15,5 @@ Source: <%= stat.getFullSourceName() %>
 Version: <%= stat.version_iOS %>
 */
 <% } %>
-NSString * MZTrackEventId_<%= e.statId %> = @"<%= e.statId %>";
+NSString * const MZTrackEventId_<%= e.statId %> = @"<%= e.statId %>";
 <% } %>

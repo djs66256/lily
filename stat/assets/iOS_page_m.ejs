@@ -12,5 +12,5 @@ Description: <%= stat.description || '' %>
 Source: <%= stat.getFullSourceName() %>
 Version: <%= stat.version_iOS %>
 */
-NSString * MZTrackPage_<%= stat.pageId %> = @"<%= stat.pageId %>";
+NSString * const MZTrackPage_<%= stat.pageId %> = @"<%= stat.pageId %>";
 <% } %>
